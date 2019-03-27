@@ -132,7 +132,7 @@ namespace ice.Controllers
             return View();
         }
 
-        public ActionResult flavors(string searchFlavors, string currentFilter, int? page)
+        public ActionResult flavors(string searchFlavors)
         {
             //search flavors
             ViewBag.CurrentFilter = searchFlavors;
@@ -143,21 +143,7 @@ namespace ice.Controllers
             {
                 flavors = db.tbl_flawors.Where(s => s.fl_name.Contains(searchFlavors));
             }
-
-            //pagination
-            if (searchFlavors != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchFlavors = currentFilter;
-            }
-
-            //pagination
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(flavors.ToPagedList(pageNumber, pageSize).OrderByDescending(x=> x.fl_id));
+            return View(flavors.ToList());
         }
 
         public ActionResult Errorpage()

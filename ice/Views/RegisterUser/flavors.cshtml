@@ -1,6 +1,4 @@
-﻿@model PagedList.IPagedList<ice.Models.tbl_flawors>
-@using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+﻿@model IEnumerable<ice.Models.tbl_flawors>
 
 @{
     ViewBag.Title = "flowers";
@@ -13,10 +11,10 @@
             Flavors
         </h2>
         <div class="col-lg-10 col-md-10 text-right">
-            @using (Html.BeginForm("flavors", "RegisterUserController", FormMethod.Get))
+            @using (Html.BeginForm())
             {
                 <p>
-                    @Html.TextBox("searchFlavors", ViewBag.CurrentFilter as string)
+                    @Html.TextBox("searchFlavors")
                     <input type="submit" value="Search" />
                 </p>
             }
@@ -34,9 +32,3 @@
         </div>
     }
 </div>
-
-<br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("Index", 
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
