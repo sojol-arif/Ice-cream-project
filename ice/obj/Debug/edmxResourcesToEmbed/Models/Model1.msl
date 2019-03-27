@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ICECREAMPROJECTModelStoreContainer" CdmEntityContainer="ICECREAMPROJECTEntities">
+    <EntitySetMapping Name="TBL_MEMBERSHIP">
+      <EntityTypeMapping TypeName="ICECREAMPROJECTModel.TBL_MEMBERSHIP">
+        <MappingFragment StoreEntitySet="TBL_MEMBERSHIP">
+          <ScalarProperty Name="MEM_ID" ColumnName="MEM_ID" />
+          <ScalarProperty Name="MEM_TYPE" ColumnName="MEM_TYPE" />
+          <ScalarProperty Name="MEM_PAYMENT" ColumnName="MEM_PAYMENT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_user">
+      <EntityTypeMapping TypeName="ICECREAMPROJECTModel.tbl_user">
+        <MappingFragment StoreEntitySet="tbl_user">
+          <ScalarProperty Name="u_id" ColumnName="u_id" />
+          <ScalarProperty Name="u_name" ColumnName="u_name" />
+          <ScalarProperty Name="u_email" ColumnName="u_email" />
+          <ScalarProperty Name="u_image" ColumnName="u_image" />
+          <ScalarProperty Name="u_contact" ColumnName="u_contact" />
+          <ScalarProperty Name="u_password" ColumnName="u_password" />
+          <ScalarProperty Name="u_subs" ColumnName="u_subs" />
+          <ScalarProperty Name="u_cpassword" ColumnName="u_cpassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_feedback">
+      <EntityTypeMapping TypeName="ICECREAMPROJECTModel.tbl_feedback">
+        <MappingFragment StoreEntitySet="tbl_feedback">
+          <ScalarProperty Name="f_contact" ColumnName="f_contact" />
+          <ScalarProperty Name="f_name" ColumnName="f_name" />
+          <ScalarProperty Name="f_email" ColumnName="f_email" />
+          <ScalarProperty Name="f_text" ColumnName="f_text" />
+          <ScalarProperty Name="f_id" ColumnName="f_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_flawors">
+      <EntityTypeMapping TypeName="ICECREAMPROJECTModel.tbl_flawors">
+        <MappingFragment StoreEntitySet="tbl_flawors">
+          <ScalarProperty Name="fl_image" ColumnName="fl_image" />
+          <ScalarProperty Name="fl_name" ColumnName="fl_name" />
+          <ScalarProperty Name="fl_id" ColumnName="fl_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_reciepe">
+      <EntityTypeMapping TypeName="ICECREAMPROJECTModel.tbl_reciepe">
+        <MappingFragment StoreEntitySet="tbl_reciepe">
+          <ScalarProperty Name="r_fk_flid" ColumnName="r_fk_flid" />
+          <ScalarProperty Name="r_fk_userid" ColumnName="r_fk_userid" />
+          <ScalarProperty Name="r_description" ColumnName="r_description" />
+          <ScalarProperty Name="r_image" ColumnName="r_image" />
+          <ScalarProperty Name="r_name" ColumnName="r_name" />
+          <ScalarProperty Name="r_id" ColumnName="r_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

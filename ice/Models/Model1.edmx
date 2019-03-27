@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ICECREAMPROJECTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_feedback">
+          <Key>
+            <PropertyRef Name="f_id" />
+          </Key>
+          <Property Name="f_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="f_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="f_email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="f_contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="f_text" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_flawors">
+          <Key>
+            <PropertyRef Name="fl_id" />
+          </Key>
+          <Property Name="fl_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fl_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fl_image" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_MEMBERSHIP">
+          <Key>
+            <PropertyRef Name="MEM_ID" />
+          </Key>
+          <Property Name="MEM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEM_TYPE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MEM_PAYMENT" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_reciepe">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="r_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="r_image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="r_description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="r_fk_userid" Type="int" />
+          <Property Name="r_fk_flid" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="u_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="u_email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="u_image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="u_contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="u_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="u_subs" Type="int" />
+          <Property Name="u_cpassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tbl_recie__r_fk___5441852A">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
+          <End Role="tbl_reciepe" Type="Self.tbl_reciepe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="tbl_reciepe">
+              <PropertyRef Name="r_fk_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_recie__r_fk___5535A963">
+          <End Role="tbl_flawors" Type="Self.tbl_flawors" Multiplicity="0..1" />
+          <End Role="tbl_reciepe" Type="Self.tbl_reciepe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_flawors">
+              <PropertyRef Name="fl_id" />
+            </Principal>
+            <Dependent Role="tbl_reciepe">
+              <PropertyRef Name="r_fk_flid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_user__u_subs__4316F928">
+          <End Role="TBL_MEMBERSHIP" Type="Self.TBL_MEMBERSHIP" Multiplicity="0..1" />
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_MEMBERSHIP">
+              <PropertyRef Name="MEM_ID" />
+            </Principal>
+            <Dependent Role="tbl_user">
+              <PropertyRef Name="u_subs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ICECREAMPROJECTModelStoreContainer">
+          <EntitySet Name="tbl_feedback" EntityType="Self.tbl_feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_flawors" EntityType="Self.tbl_flawors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_MEMBERSHIP" EntityType="Self.TBL_MEMBERSHIP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_reciepe" EntityType="Self.tbl_reciepe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_user" EntityType="Self.tbl_user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tbl_recie__r_fk___5441852A" Association="Self.FK__tbl_recie__r_fk___5441852A">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_reciepe" EntitySet="tbl_reciepe" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_recie__r_fk___5535A963" Association="Self.FK__tbl_recie__r_fk___5535A963">
+            <End Role="tbl_flawors" EntitySet="tbl_flawors" />
+            <End Role="tbl_reciepe" EntitySet="tbl_reciepe" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_user__u_subs__4316F928" Association="Self.FK__tbl_user__u_subs__4316F928">
+            <End Role="TBL_MEMBERSHIP" EntitySet="TBL_MEMBERSHIP" />
+            <End Role="tbl_user" EntitySet="tbl_user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ICECREAMPROJECTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBL_MEMBERSHIP">
+          <Key>
+            <PropertyRef Name="MEM_ID" />
+          </Key>
+          <Property Name="MEM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MEM_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MEM_PAYMENT" Type="Int32" />
+          <NavigationProperty Name="tbl_user" Relationship="Self.FK__tbl_user__u_subs__4316F928" FromRole="TBL_MEMBERSHIP" ToRole="tbl_user" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="u_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_subs" Type="Int32" />
+          <Property Name="u_cpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TBL_MEMBERSHIP" Relationship="Self.FK__tbl_user__u_subs__4316F928" FromRole="tbl_user" ToRole="TBL_MEMBERSHIP" />
+          <NavigationProperty Name="tbl_reciepe" Relationship="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5441852A" FromRole="tbl_user" ToRole="tbl_reciepe" />
+        </EntityType>
+        <Association Name="FK__tbl_user__u_subs__4316F928">
+          <End Role="TBL_MEMBERSHIP" Type="Self.TBL_MEMBERSHIP" Multiplicity="0..1" />
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_MEMBERSHIP">
+              <PropertyRef Name="MEM_ID" />
+            </Principal>
+            <Dependent Role="tbl_user">
+              <PropertyRef Name="u_subs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ICECREAMPROJECTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_MEMBERSHIP" EntityType="Self.TBL_MEMBERSHIP" />
+          <EntitySet Name="tbl_user" EntityType="Self.tbl_user" />
+          <AssociationSet Name="FK__tbl_user__u_subs__4316F928" Association="Self.FK__tbl_user__u_subs__4316F928">
+            <End Role="TBL_MEMBERSHIP" EntitySet="TBL_MEMBERSHIP" />
+            <End Role="tbl_user" EntitySet="tbl_user" />
+          </AssociationSet>
+          <EntitySet Name="tbl_feedback" EntityType="ICECREAMPROJECTModel.tbl_feedback" />
+          <EntitySet Name="tbl_flawors" EntityType="ICECREAMPROJECTModel.tbl_flawors" />
+          <EntitySet Name="tbl_reciepe" EntityType="ICECREAMPROJECTModel.tbl_reciepe" />
+          <AssociationSet Name="FK__tbl_recie__r_fk___5535A963" Association="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5535A963">
+            <End Role="tbl_flawors" EntitySet="tbl_flawors" />
+            <End Role="tbl_reciepe" EntitySet="tbl_reciepe" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_recie__r_fk___5441852A" Association="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5441852A">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_reciepe" EntitySet="tbl_reciepe" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_feedback">
+          <Key>
+            <PropertyRef Name="f_id" />
+          </Key>
+          <Property Name="f_id" Type="Int32" Nullable="false" />
+          <Property Name="f_text" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="f_email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f_contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_flawors">
+          <Key>
+            <PropertyRef Name="fl_id" />
+          </Key>
+          <Property Name="fl_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fl_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fl_image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_reciepe" Relationship="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5535A963" FromRole="tbl_flawors" ToRole="tbl_reciepe" />
+        </EntityType>
+        <EntityType Name="tbl_reciepe">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="r_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="r_image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="r_description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="r_fk_userid" Type="Int32" />
+          <Property Name="r_fk_flid" Type="Int32" />
+          <NavigationProperty Name="tbl_flawors" Relationship="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5535A963" FromRole="tbl_reciepe" ToRole="tbl_flawors" />
+          <NavigationProperty Name="tbl_user" Relationship="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5441852A" FromRole="tbl_reciepe" ToRole="tbl_user" />
+        </EntityType>
+        <Association Name="FK__tbl_recie__r_fk___5535A963">
+          <End Type="ICECREAMPROJECTModel.tbl_flawors" Role="tbl_flawors" Multiplicity="0..1" />
+          <End Type="ICECREAMPROJECTModel.tbl_reciepe" Role="tbl_reciepe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_flawors">
+              <PropertyRef Name="fl_id" />
+            </Principal>
+            <Dependent Role="tbl_reciepe">
+              <PropertyRef Name="r_fk_flid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_recie__r_fk___5441852A">
+          <End Type="ICECREAMPROJECTModel.tbl_user" Role="tbl_user" Multiplicity="0..1" />
+          <End Type="ICECREAMPROJECTModel.tbl_reciepe" Role="tbl_reciepe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="tbl_reciepe">
+              <PropertyRef Name="r_fk_userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ICECREAMPROJECTModelStoreContainer" CdmEntityContainer="ICECREAMPROJECTEntities">
+          <EntitySetMapping Name="TBL_MEMBERSHIP">
+            <EntityTypeMapping TypeName="ICECREAMPROJECTModel.TBL_MEMBERSHIP">
+              <MappingFragment StoreEntitySet="TBL_MEMBERSHIP">
+                <ScalarProperty Name="MEM_ID" ColumnName="MEM_ID" />
+                <ScalarProperty Name="MEM_TYPE" ColumnName="MEM_TYPE" />
+                <ScalarProperty Name="MEM_PAYMENT" ColumnName="MEM_PAYMENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_user">
+            <EntityTypeMapping TypeName="ICECREAMPROJECTModel.tbl_user">
+              <MappingFragment StoreEntitySet="tbl_user">
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="u_name" ColumnName="u_name" />
+                <ScalarProperty Name="u_email" ColumnName="u_email" />
+                <ScalarProperty Name="u_image" ColumnName="u_image" />
+                <ScalarProperty Name="u_contact" ColumnName="u_contact" />
+                <ScalarProperty Name="u_password" ColumnName="u_password" />
+                <ScalarProperty Name="u_subs" ColumnName="u_subs" />
+                <ScalarProperty Name="u_cpassword" ColumnName="u_cpassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_feedback">
+            <EntityTypeMapping TypeName="ICECREAMPROJECTModel.tbl_feedback">
+              <MappingFragment StoreEntitySet="tbl_feedback">
+                <ScalarProperty Name="f_contact" ColumnName="f_contact" />
+                <ScalarProperty Name="f_name" ColumnName="f_name" />
+                <ScalarProperty Name="f_email" ColumnName="f_email" />
+                <ScalarProperty Name="f_text" ColumnName="f_text" />
+                <ScalarProperty Name="f_id" ColumnName="f_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_flawors">
+            <EntityTypeMapping TypeName="ICECREAMPROJECTModel.tbl_flawors">
+              <MappingFragment StoreEntitySet="tbl_flawors">
+                <ScalarProperty Name="fl_image" ColumnName="fl_image" />
+                <ScalarProperty Name="fl_name" ColumnName="fl_name" />
+                <ScalarProperty Name="fl_id" ColumnName="fl_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_reciepe">
+            <EntityTypeMapping TypeName="ICECREAMPROJECTModel.tbl_reciepe">
+              <MappingFragment StoreEntitySet="tbl_reciepe">
+                <ScalarProperty Name="r_fk_flid" ColumnName="r_fk_flid" />
+                <ScalarProperty Name="r_fk_userid" ColumnName="r_fk_userid" />
+                <ScalarProperty Name="r_description" ColumnName="r_description" />
+                <ScalarProperty Name="r_image" ColumnName="r_image" />
+                <ScalarProperty Name="r_name" ColumnName="r_name" />
+                <ScalarProperty Name="r_id" ColumnName="r_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

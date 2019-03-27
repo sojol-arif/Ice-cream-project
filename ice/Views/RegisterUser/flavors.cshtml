@@ -1,0 +1,42 @@
+﻿@model PagedList.IPagedList<ice.Models.tbl_flawors>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "flowers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="serachInline" style="padding:60px 0">
+        <h2 class="col-lg-2 col-md-2" style="margin:0">
+            Flavors
+        </h2>
+        <div class="col-lg-10 col-md-10 text-right">
+            @using (Html.BeginForm("flavors", "RegisterUserController", FormMethod.Get))
+            {
+                <p>
+                    @Html.TextBox("searchFlavors", ViewBag.CurrentFilter as string)
+                    <input type="submit" value="Search" />
+                </p>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <img src="@Url.Content(item.fl_image)" class="img-thumbnail img-responsive" alt="Alternate Text" style="width:300px;height:200px" />
+            <h2>@item.fl_name</h2>
+        </div>
+    }
+</div>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", 
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 sol-xs-2">
+
+                <div class="list-group">
+                    @Html.ActionLink("Dashboard", "Dashboar", "Admin", new { @class = "list-group-item" })
+                    @Html.ActionLink("View Feedback", "Feedback", "Admin", new { @class = "list-group-item" })
+                    @Html.ActionLink("Manage User", "User", "Admin", new { @class = "list-group-item" })
+                    @Html.ActionLink("Add Flowers", "AddFlawor", "Admin", new { @class = "list-group-item" })
+                </div>
+            </div>
+
+            <div class="col-lg-10, col-md-10, col-sm-10 col-xs-10">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ICECREAMPROJECTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TBL_MEMBERSHIP">
+    <Key>
+      <PropertyRef Name="MEM_ID" />
+    </Key>
+    <Property Name="MEM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MEM_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MEM_PAYMENT" Type="Int32" />
+    <NavigationProperty Name="tbl_user" Relationship="Self.FK__tbl_user__u_subs__4316F928" FromRole="TBL_MEMBERSHIP" ToRole="tbl_user" />
+  </EntityType>
+  <EntityType Name="tbl_user">
+    <Key>
+      <PropertyRef Name="u_id" />
+    </Key>
+    <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="u_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="u_subs" Type="Int32" />
+    <Property Name="u_cpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TBL_MEMBERSHIP" Relationship="Self.FK__tbl_user__u_subs__4316F928" FromRole="tbl_user" ToRole="TBL_MEMBERSHIP" />
+    <NavigationProperty Name="tbl_reciepe" Relationship="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5441852A" FromRole="tbl_user" ToRole="tbl_reciepe" />
+  </EntityType>
+  <Association Name="FK__tbl_user__u_subs__4316F928">
+    <End Role="TBL_MEMBERSHIP" Type="Self.TBL_MEMBERSHIP" Multiplicity="0..1" />
+    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_MEMBERSHIP">
+        <PropertyRef Name="MEM_ID" />
+      </Principal>
+      <Dependent Role="tbl_user">
+        <PropertyRef Name="u_subs" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ICECREAMPROJECTEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TBL_MEMBERSHIP" EntityType="Self.TBL_MEMBERSHIP" />
+    <EntitySet Name="tbl_user" EntityType="Self.tbl_user" />
+    <AssociationSet Name="FK__tbl_user__u_subs__4316F928" Association="Self.FK__tbl_user__u_subs__4316F928">
+      <End Role="TBL_MEMBERSHIP" EntitySet="TBL_MEMBERSHIP" />
+      <End Role="tbl_user" EntitySet="tbl_user" />
+    </AssociationSet>
+    <EntitySet Name="tbl_feedback" EntityType="ICECREAMPROJECTModel.tbl_feedback" />
+    <EntitySet Name="tbl_flawors" EntityType="ICECREAMPROJECTModel.tbl_flawors" />
+    <EntitySet Name="tbl_reciepe" EntityType="ICECREAMPROJECTModel.tbl_reciepe" />
+    <AssociationSet Name="FK__tbl_recie__r_fk___5535A963" Association="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5535A963">
+      <End Role="tbl_flawors" EntitySet="tbl_flawors" />
+      <End Role="tbl_reciepe" EntitySet="tbl_reciepe" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_recie__r_fk___5441852A" Association="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5441852A">
+      <End Role="tbl_user" EntitySet="tbl_user" />
+      <End Role="tbl_reciepe" EntitySet="tbl_reciepe" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tbl_feedback">
+    <Key>
+      <PropertyRef Name="f_id" />
+    </Key>
+    <Property Name="f_id" Type="Int32" Nullable="false" />
+    <Property Name="f_text" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="f_email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f_contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_flawors">
+    <Key>
+      <PropertyRef Name="fl_id" />
+    </Key>
+    <Property Name="fl_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fl_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fl_image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_reciepe" Relationship="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5535A963" FromRole="tbl_flawors" ToRole="tbl_reciepe" />
+  </EntityType>
+  <EntityType Name="tbl_reciepe">
+    <Key>
+      <PropertyRef Name="r_id" />
+    </Key>
+    <Property Name="r_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="r_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="r_image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="r_description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="r_fk_userid" Type="Int32" />
+    <Property Name="r_fk_flid" Type="Int32" />
+    <NavigationProperty Name="tbl_flawors" Relationship="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5535A963" FromRole="tbl_reciepe" ToRole="tbl_flawors" />
+    <NavigationProperty Name="tbl_user" Relationship="ICECREAMPROJECTModel.FK__tbl_recie__r_fk___5441852A" FromRole="tbl_reciepe" ToRole="tbl_user" />
+  </EntityType>
+  <Association Name="FK__tbl_recie__r_fk___5535A963">
+    <End Type="ICECREAMPROJECTModel.tbl_flawors" Role="tbl_flawors" Multiplicity="0..1" />
+    <End Type="ICECREAMPROJECTModel.tbl_reciepe" Role="tbl_reciepe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_flawors">
+        <PropertyRef Name="fl_id" />
+      </Principal>
+      <Dependent Role="tbl_reciepe">
+        <PropertyRef Name="r_fk_flid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_recie__r_fk___5441852A">
+    <End Type="ICECREAMPROJECTModel.tbl_user" Role="tbl_user" Multiplicity="0..1" />
+    <End Type="ICECREAMPROJECTModel.tbl_reciepe" Role="tbl_reciepe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_user">
+        <PropertyRef Name="u_id" />
+      </Principal>
+      <Dependent Role="tbl_reciepe">
+        <PropertyRef Name="r_fk_userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
